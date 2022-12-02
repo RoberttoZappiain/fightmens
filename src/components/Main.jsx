@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import videoBg from '../assets/sword.mp4'
-import { Carousel, Accordion, Card, Table, Checkbox, Label, Button, Modal, TextInput } from 'flowbite-react'
+import { Carousel, Alert, Accordion, Card, Table, Checkbox, Label, Button, Modal, TextInput } from 'flowbite-react'
 import enemy1 from '../assets/orc.png'
 import enemy2 from '../assets/Silver.png'
 import player1 from '../assets/player1.png'
 import player2 from '../assets/player2.png'
 import Push from 'push-js';
-
+import HiInformationCircle from "react"
 const Main =  () => {
   const [showModal, setShowModal] = useState(false);
-  
+  const [showModal2, setShowModal2] = useState(false);
+
   const push = new Push(); // All arguments are optional
   push.subscribe().then(subscription => {});
   push.unsubscribe().then(() => {});
@@ -17,6 +18,7 @@ const Main =  () => {
     
       <div className='main '>
         <div className="overlay"></div>
+        
         <video src={videoBg} autoPlay loop muted />
         <div className="content ">
 
@@ -44,7 +46,71 @@ const Main =  () => {
               </div>
             </a>
           </div>
-          
+          {showModal ? (
+        <>
+          <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none ">
+            <div className="relative w-96 my-6 mx-auto max-w-3xl">
+              <div className="border border-solid border-blueGray-200 rounded-lg shadow-lg relative flex flex-col w-full bg-black outline-none focus:outline-none">
+                <div className="flex items-start justify-between p-5 rounded-t ">
+                  <h3 className="text-3xl font=semibold">Descarga Gratis</h3>
+                  <button
+                    className="bg-transparent border-0 text-black float-right"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="text-white opacity-7 h-14 w-14 text-2xl block  py-0 rounded-full">
+                      x
+                    </span>
+                  </button>
+                </div>
+                <div className="relative p-6 flex-auto">
+                  <form className="bg-black shadow-md rounded px-8 pt-6 pb-8 w-full">
+                    <label className="block text-white text-sm font-light mb-1">
+                      Nombre Completo
+                    </label>
+                    <input className="shadow appearance-none border rounded w-full mb-6 py-2 px-1 text-black"
+                    value={""} />
+                    <label className="block text-white text-sm font-light mb-1">
+                      Direccion de correo electronico
+                    </label>                 
+                    
+                    <input className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
+                    value={""}
+                    />
+                    
+                  </form>
+                </div>
+                <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                    
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="text-gray-200 bg-blue-300/75 active:bg-blue-700 font-bold uppercase text-lg px-10 py-3 rounded  hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                    type="button"
+                    onClick={() => setShowModal2(true)}
+                  >
+                    Descargar
+                  </button>
+                </div>
+                {showModal2 ? (
+        <>
+          <Alert color="info">
+  <span>
+    <span className="font-medium">
+      Registro Exitoso!
+    </span>
+    {' '}Gracias por registrarte <a href="https://drive.google.com/file/d/10sUK6zUdi3rbFJZ3HtZaqfGsH2QAq8BU/view?usp=sharing">Descarga Aqui</a>
+  </span>
+</Alert>
+        </>
+      ) : null}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : null}
 
           <div className="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4 m-5">
             <a
